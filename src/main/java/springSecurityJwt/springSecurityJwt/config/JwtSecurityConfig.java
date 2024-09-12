@@ -8,13 +8,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @RequiredArgsConstructor
 public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-
     private final TokenProvider tokenProvider;
 
     @Override
-    public void configure(HttpSecurity httpSecurity) {
+    public void configure(HttpSecurity http) {
 
-        httpSecurity.addFilterBefore(
+        // security 로직에 JwtFilter 등록
+        http.addFilterBefore(
                 new JwtFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter.class
         );
